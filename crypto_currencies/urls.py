@@ -3,7 +3,7 @@ from rest_framework import routers
 from .views import CryptoViewSet
 
 router = routers.DefaultRouter()
-router.register('crypto', CryptoViewSet)
+router.register(r'crypto_currencies', CryptoViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
