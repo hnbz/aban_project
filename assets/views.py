@@ -36,3 +36,12 @@ class WalletView(RetrieveAPIView):
 
     def get_queryset(self):
         return Wallet.objects.filter(user=self.request.user).first()
+
+
+class AssetView(ListAPIView):
+    serializer_class = AssetSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Asset.objects.filter(user=self.request.user).all()
+
