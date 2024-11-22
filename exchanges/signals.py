@@ -9,7 +9,9 @@ from .utils import buy_from_exchange, process_exchange
 def buy_cumulative_crypto(sender, instance, created, **kwargs):
     if created:
         pending_exchange = Exchange.objects.filter(status=Exchange.ExchangeStatusChoice.PENDING, crypto_currency=instance.crypto_currency)
-        pending_exchange_amount = pending_exchange.annotate(sum = Sum(F('crypto_price_at_the_time')*F('quantity'), default=0))['sum']
+        pending_exchange_amount = pending_exchange.aggregate(
+            total=Sum(F('crypto_price_at_the_time') * F('quantity'))
+        )['total'] or 0
         if pending_exchange_amount >= 10:
             buy_from_exchange(instance.crypto_currency.symbol, pending_exchange_amount)
             process_exchange(pending_exchange)
