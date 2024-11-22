@@ -17,5 +17,5 @@ class Asset(BaseModel):
 class Deposit(BaseModel):
     wallet = models.ForeignKey(Wallet, on_delete=models.RESTRICT)
     amount = models.DecimalField(max_digits=20, decimal_places=10)
-    before_balance = models.BigIntegerField()
-    after_balance = models.BigIntegerField()
+    before_balance = models.DecimalField(max_digits=20, decimal_places=10)
+    after_balance = models.DecimalField(max_digits=20, decimal_places=10)
