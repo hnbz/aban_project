@@ -17,7 +17,7 @@ class ExchangeView(ListCreateAPIView):
 
     def perform_create(self, serializer: ExchangeSerializer):
         crypto = get_object_or_404(CryptoCurrency, pk=serializer.validated_data.get('crypto_currency'))
-        wallet = self.request.user.get_wallet()
+        wallet = Wallet.objects.filter(user=self.request.user).first()
         volume = serializer.validated_data.get('quantity') * crypto.price_buy
         if wallet.balance < volume:
             raise APIException(detail='insufficient balance', code=status.HTTP_400_BAD_REQUEST)
