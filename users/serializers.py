@@ -6,3 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         exclude = ('is_staff', 'is_superuser', ' created_at', 'updated_at')
         model = User
+
+class LoginSerializer(serializers.Serializer):
+    mobile = serializers.CharField(required=True, max_length=10, min_length=10)
+    password = serializers.CharField(required=True, min_length=6)
