@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .permissions import IsSuperUserOrReadOnly
+from .serializers import CryptocurrencySerializer
+from .models import CryptoCurrency
+
+class CryptoViewSet(viewsets.ModelViewSet):
+    queryset = CryptoCurrency.objects.all()
+    serializer_class = CryptocurrencySerializer
+    permission_classes = [IsSuperUserOrReadOnly]
