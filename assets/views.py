@@ -26,7 +26,7 @@ class DepositView(ListCreateAPIView):
                 wallet.save()
                 return Response(status.HTTP_201_CREATED)
         except:
-            raise ServiceUnavailable(detail='verification required', code=status.HTTP_503_SERVICE_UNAVAILABLE)
+            raise ServiceUnavailable(detail='Charge wallet failed', code=status.HTTP_503_SERVICE_UNAVAILABLE)
 
     def get_queryset(self):
         wallet = Wallet.objects.filter(user=self.request.user).first()
