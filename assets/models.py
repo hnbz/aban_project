@@ -13,3 +13,9 @@ class Asset(BaseModel):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=20, decimal_places=8, default=0)
     crypto_currency = models.ForeignKey(CryptoCurrency, on_delete=models.RESTRICT)
+
+class Deposit(BaseModel):
+    wallet = models.ForeignKey(Wallet, on_delete=models.RESTRICT)
+    amount = models.BigIntegerField(validators=[MinValueValidator(limit_value=1000)])
+    before_balance = models.BigIntegerField()
+    after_balance = models.BigIntegerField()
