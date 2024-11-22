@@ -62,10 +62,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Create a superuser account:
+4. Create a superuser account(used to add cryptocurrencies and manage related functionalities):
 
 ````bash
-python manage.py create_superuser
+python manage.py createsuperuser
 ````
 
 5. Run the development server:
