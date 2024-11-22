@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator
 
 class Wallet(BaseModel):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    balance = models.BigIntegerField(default=0, validators=[MinValueValidator(limit_value=0)])
+    balance = models.DecimalField(max_digits=20, decimal_places=10)
 
 class Asset(BaseModel):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -16,6 +16,6 @@ class Asset(BaseModel):
 
 class Deposit(BaseModel):
     wallet = models.ForeignKey(Wallet, on_delete=models.RESTRICT)
-    amount = models.BigIntegerField(validators=[MinValueValidator(limit_value=1000)])
+    amount = models.DecimalField(max_digits=20, decimal_places=10)
     before_balance = models.BigIntegerField()
     after_balance = models.BigIntegerField()
