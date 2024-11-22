@@ -12,3 +12,10 @@ class AssetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asset
         fields = ['crypto_currency', 'quantity']
+
+
+class DepositSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Deposit
+        fields = '__all__'
+        read_only_fields = ['created_at', 'updated_at', 'wallet']
