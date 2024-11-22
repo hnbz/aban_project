@@ -1,0 +1,27 @@
+version: "3.9"
+   
+services:
+  cryptobuyerdb:
+    env_file: .env
+    image: bitnami/postgresql:13
+    volumes:
+      - abandb:/var/lib/postgresql/data
+    container_name: abandb
+    ports:
+      - 5432:5432
+
+  web:
+    build: .
+    command: ./docker-init.sh
+    restart: unless-stopped
+    volumes:
+      - .:/src
+    ports:
+      - 8000:8000
+    env_file: .env
+    depends_on:
+      - abandb
+
+volumes:
+  cryptobuyerdb:
+    external: false
