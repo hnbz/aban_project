@@ -4,8 +4,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
-        fields = ['mobile']
-        exclude = ('is_staff', 'is_superuser', 'created_at', 'updated_at')
+        fields = ['mobile', 'password']
         model = User
 
 class LoginSerializer(serializers.Serializer):
