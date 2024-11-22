@@ -28,3 +28,11 @@ class DepositView(ListCreateAPIView):
     def get_queryset(self):
         wallet = Wallet.objects.filter(user=self.request.user).first()
         return Deposit.objects.filter(wallet=wallet).all()
+
+
+class WalletView(RetrieveAPIView):
+    serializer_class = WalletSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Wallet.objects.filter(user=self.request.user).first()
