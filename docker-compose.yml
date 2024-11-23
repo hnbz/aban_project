@@ -1,7 +1,7 @@
 version: "3.9"
    
 services:
-  cryptobuyerdb:
+  abandb:
     env_file: .env
     image: bitnami/postgresql:13
     volumes:
@@ -23,5 +23,5 @@ services:
       - abandb
 
 volumes:
-  cryptobuyerdb:
+  abandb:
     external: false
